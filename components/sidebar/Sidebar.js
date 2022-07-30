@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 import SideBarMenuItem from "./SideBarMenuItem";
 
 import {
@@ -61,10 +60,12 @@ const Sidebar = () => {
 
       {/* Mini profile */}
       <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start xl:mt-10 sm:w-full sm:mt-5">
-        <img
+        <Image
           src="https://avatars.githubusercontent.com/u/54191647?v=4"
           alt="Mohamed fareed front end developer face"
-          className="rounded-full h-10 w-10 xl:mr-2"
+          className="rounded-full mr-5"
+          width="40"
+          height="40"
         />
         <div className="pl-1 leading-5 hidden xl:inline">
           <h4 className="font-bold">Mohamed Farid</h4>
