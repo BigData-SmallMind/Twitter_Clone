@@ -1,10 +1,19 @@
 import Image from "next/image";
-import { DotsHorizontalIcon } from "@heroicons/react/outline";
+import {
+  ChartBarIcon,
+  ChatIcon,
+  HeartIcon,
+  ShareIcon,
+  TrashIcon,
+  DotsHorizontalIcon,
+} from "@heroicons/react/outline";
+
 const Post = (props) => {
   const { post } = props;
+
   return (
     <div className="p-3 flex">
-      {/* User Image */}
+      {/* Left Side - User Image */}
       <div className="pr-2">
         <Image
           src={post.userImage}
@@ -14,9 +23,10 @@ const Post = (props) => {
           width="40"
         />
       </div>
+
       {/* Right Side */}
-      {/* Top */}
       <div className="w-full">
+        {/* Top */}
         <div className="flex items-center justify-between">
           {/* Name & @Name & timestamp */}
           <div className="flex space-x-2">
@@ -33,9 +43,21 @@ const Post = (props) => {
           {/* DotIcon */}
           <DotsHorizontalIcon className="hoverEffect h-10 w-10 p-2" />
         </div>
-        {/* Description Text*/}
+
+        {/* Post Description Text*/}
         <span className="pt-5">{post.text}</span>
-        <img src={post.image} className="w-full pr-10" alt={post.text} />
+
+        {/* Post image */}
+        <img src={post.image} className="w-full rounded-xl" alt={post.text} />
+
+        {/* Post Icons */}
+        <div className="flex justify-around mt-2 w-full">
+          <ChartBarIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <TrashIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <HeartIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <ShareIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <ChatIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+        </div>
       </div>
     </div>
   );

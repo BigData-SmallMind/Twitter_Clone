@@ -1,7 +1,26 @@
 import Head from "next/head";
-import Sidebar from "../components/sidebar/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar";
 import Feed from "../components/Feed/Feed";
-export default function Home() {
+import Widgets from "../components/Widgets/Widgets";
+
+export async function getServerSideProps() {
+  const newsResults = await fetch(
+    "https://saurav.tech/NewsAPI/top-headlines/category/health/in.json"
+  ).then((res) => res.json());
+
+  const usersResults = await fetch(
+    "https://randomuser.me/api/?results=30&inc=name,login,picture,gender,id"
+  ).then((res) => res.json());
+
+  return {
+    props: {
+      newsResults: newsResults,
+      usersResults: usersResults,
+    },
+  };
+}
+
+export default function Home(props) {
   return (
     <>
       <Head>
@@ -17,8 +36,12 @@ export default function Home() {
         {/* Feed */}
         <Feed />
 
-        {/* Widget */}
-
+        {/* Widgets */}
+        <Widgets
+          newsResults={props.newsResults}
+          usersResults={props.usersResults}
+        />
+        {console.log(props.usersResults)}
         {/* Modal */}
       </main>
     </>
