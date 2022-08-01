@@ -41,7 +41,7 @@ export default function Home(props) {
           newsResults={props.newsResults}
           usersResults={props.usersResults}
         />
-        {console.log(props.usersResults)}
+
         {/* Modal */}
       </main>
     </>
