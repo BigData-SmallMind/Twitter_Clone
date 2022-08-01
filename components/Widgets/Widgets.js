@@ -5,8 +5,8 @@ import Users from "./Users";
 
 const Widgets = (props) => {
   const { newsResults, usersResults } = props;
-  const [articleNum, setArticleNum] = useState(1);
-  const [usersNum, setUsersNum] = useState(1);
+  const [articleNum, setArticleNum] = useState(4);
+  const [usersNum, setUsersNum] = useState(4);
 
   const handleShowMoreNews = () => {
     setArticleNum((articleNum) => articleNum + 2);

@@ -1,7 +1,7 @@
 const Users = (props) => {
   const { user } = props;
   return (
-    <div className="px-4 flex justify-between items-center hover:bg-gray-200 transition duration-200">
+    <div className="px-4 py-2 flex justify-between items-center hover:bg-gray-200 transition duration-200">
       <a href={"www.google.com"} className="w-full">
         <div className="flex items-center space-x-2">
           <img className="rounded-full" src={user.picture.medium}></img>
