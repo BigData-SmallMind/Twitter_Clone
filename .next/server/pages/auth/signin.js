@@ -1,0 +1,56 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(() => {
+var exports = {};
+exports.id = "pages/auth/signin";
+exports.ids = ["pages/auth/signin"];
+exports.modules = {
+
+/***/ "./pages/auth/signin.js":
+/*!******************************!*\
+  !*** ./pages/auth/signin.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__),\n/* harmony export */   \"getServerSideProps\": () => (/* binding */ getServerSideProps)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_auth_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next-auth/react */ \"next-auth/react\");\n/* harmony import */ var next_auth_react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_auth_react__WEBPACK_IMPORTED_MODULE_1__);\n\n\nasync function getServerSideProps() {\n    const providers = await (0,next_auth_react__WEBPACK_IMPORTED_MODULE_1__.getProviders)();\n    return {\n        props: {\n            providers: providers\n        }\n    };\n}\nconst signin = (props)=>{\n    const { providers  } = props;\n    const providersButtons = Object.values(providers).map((provider, index)=>{\n        return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"button\", {\n            onClick: ()=>{\n                (0,next_auth_react__WEBPACK_IMPORTED_MODULE_1__.signIn)(provider.id, {\n                    callbackUrl: \"/\"\n                });\n            },\n            className: \"bg-red-400 rounded-lg p-3 text-white hover:bg-red-500\",\n            children: [\n                \"Sign in with \",\n                provider.name\n            ]\n        }, index, true, {\n            fileName: \"D:\\\\twitter-clone\\\\pages\\\\auth\\\\signin.js\",\n            lineNumber: 17,\n            columnNumber: 7\n        }, undefined);\n    });\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n        className: \"flex justify-center mt-20 space-x-4\",\n        children: [\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"img\", {\n                src: \"https://cdn.cms-twdigitalassets.com/content/dam/help-twitter/en/twitter-tips/desktop-assets/ch-01/ch12findphone.png.twimg.1920.png\",\n                alt: \"twitter image inside a phone\",\n                className: \"hidden object-cover md:w-44 md:h-80 rotate-6 md:inline-flex\"\n            }, void 0, false, {\n                fileName: \"D:\\\\twitter-clone\\\\pages\\\\auth\\\\signin.js\",\n                lineNumber: 31,\n                columnNumber: 7\n            }, undefined),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                className: \"\",\n                children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                    className: \"flex flex-col items-center\",\n                    children: [\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"img\", {\n                            className: \"w-36 object-cover\",\n                            src: \"https://help.twitter.com/content/dam/help-twitter/brand/logo.png\",\n                            alt: \"twitter logo\"\n                        }, void 0, false, {\n                            fileName: \"D:\\\\twitter-clone\\\\pages\\\\auth\\\\signin.js\",\n                            lineNumber: 38,\n                            columnNumber: 11\n                        }, undefined),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"p\", {\n                            className: \"text-center text-sm italic my-10\",\n                            children: \"This app is created for learning purposes\"\n                        }, void 0, false, {\n                            fileName: \"D:\\\\twitter-clone\\\\pages\\\\auth\\\\signin.js\",\n                            lineNumber: 43,\n                            columnNumber: 11\n                        }, undefined),\n                        providersButtons\n                    ]\n                }, void 0, true, {\n                    fileName: \"D:\\\\twitter-clone\\\\pages\\\\auth\\\\signin.js\",\n                    lineNumber: 37,\n                    columnNumber: 9\n                }, undefined)\n            }, void 0, false, {\n                fileName: \"D:\\\\twitter-clone\\\\pages\\\\auth\\\\signin.js\",\n                lineNumber: 36,\n                columnNumber: 7\n            }, undefined)\n        ]\n    }, void 0, true, {\n        fileName: \"D:\\\\twitter-clone\\\\pages\\\\auth\\\\signin.js\",\n        lineNumber: 30,\n        columnNumber: 5\n    }, undefined);\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (signin);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9wYWdlcy9hdXRoL3NpZ25pbi5qcy5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQTtBQUF1RDtBQUVoRCxlQUFlRSxrQkFBa0IsR0FBRztJQUN6QyxNQUFNQyxTQUFTLEdBQUcsTUFBTUgsNkRBQVksRUFBRTtJQUN0QyxPQUFPO1FBQ0xJLEtBQUssRUFBRTtZQUNMRCxTQUFTLEVBQUVBLFNBQVM7U0FDckI7S0FDRixDQUFDO0NBQ0g7QUFFRCxNQUFNRSxNQUFNLEdBQUcsQ0FBQ0QsS0FBSyxHQUFLO0lBQ3hCLE1BQU0sRUFBRUQsU0FBUyxHQUFFLEdBQUdDLEtBQUs7SUFFM0IsTUFBTUUsZ0JBQWdCLEdBQUdDLE1BQU0sQ0FBQ0MsTUFBTSxDQUFDTCxTQUFTLENBQUMsQ0FBQ00sR0FBRyxDQUFDLENBQUNDLFFBQVEsRUFBRUMsS0FBSyxHQUFLO1FBQ3pFLHFCQUNFLDhEQUFDQyxRQUFNO1lBRUxDLE9BQU8sRUFBRSxJQUFNO2dCQUNiWix1REFBTSxDQUFDUyxRQUFRLENBQUNJLEVBQUUsRUFBRTtvQkFBRUMsV0FBVyxFQUFFLEdBQUc7aUJBQUUsQ0FBQyxDQUFDO2FBQzNDO1lBQ0RDLFNBQVMsRUFBQyx1REFBdUQ7O2dCQUNsRSxlQUNjO2dCQUFDTixRQUFRLENBQUNPLElBQUk7O1dBTnRCTixLQUFLOzs7O3FCQU9ILENBQ1Q7S0FDSCxDQUFDO0lBRUYscUJBQ0UsOERBQUNPLEtBQUc7UUFBQ0YsU0FBUyxFQUFDLHFDQUFxQzs7MEJBQ2xELDhEQUFDRyxLQUFHO2dCQUNGQyxHQUFHLEVBQUMsb0lBQW9JO2dCQUN4SUMsR0FBRyxFQUFDLDhCQUE4QjtnQkFDbENMLFNBQVMsRUFBQyw2REFBOEQ7Ozs7O3lCQUN4RTswQkFDRiw4REFBQ0UsS0FBRztnQkFBQ0YsU0FBUyxFQUFDLEVBQUU7MEJBQ2YsNEVBQUNFLEtBQUc7b0JBQUNGLFNBQVMsRUFBQyw0QkFBNEI7O3NDQUN6Qyw4REFBQ0csS0FBRzs0QkFDRkgsU0FBUyxFQUFDLG1CQUFtQjs0QkFDN0JJLEdBQUcsRUFBQyxrRUFBa0U7NEJBQ3RFQyxHQUFHLEVBQUMsY0FBYzs7Ozs7cUNBQ2xCO3NDQUNGLDhEQUFDQyxHQUFDOzRCQUFDTixTQUFTLEVBQUMsa0NBQWtDO3NDQUFDLDJDQUVoRDs7Ozs7cUNBQUk7d0JBQ0hWLGdCQUFnQjs7Ozs7OzZCQUNiOzs7Ozt5QkFDRjs7Ozs7O2lCQUNGLENBQ047Q0FDSDtBQUVELGlFQUFlRCxNQUFNLEVBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly90d2l0dGVyLWNsb25lLy4vcGFnZXMvYXV0aC9zaWduaW4uanM/ZDM0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBnZXRQcm92aWRlcnMsIHNpZ25JbiB9IGZyb20gXCJuZXh0LWF1dGgvcmVhY3RcIjtcclxuXHJcbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBnZXRTZXJ2ZXJTaWRlUHJvcHMoKSB7XHJcbiAgY29uc3QgcHJvdmlkZXJzID0gYXdhaXQgZ2V0UHJvdmlkZXJzKCk7XHJcbiAgcmV0dXJuIHtcclxuICAgIHByb3BzOiB7XHJcbiAgICAgIHByb3ZpZGVyczogcHJvdmlkZXJzLFxyXG4gICAgfSxcclxuICB9O1xyXG59XHJcblxyXG5jb25zdCBzaWduaW4gPSAocHJvcHMpID0+IHtcclxuICBjb25zdCB7IHByb3ZpZGVycyB9ID0gcHJvcHM7XHJcblxyXG4gIGNvbnN0IHByb3ZpZGVyc0J1dHRvbnMgPSBPYmplY3QudmFsdWVzKHByb3ZpZGVycykubWFwKChwcm92aWRlciwgaW5kZXgpID0+IHtcclxuICAgIHJldHVybiAoXHJcbiAgICAgIDxidXR0b25cclxuICAgICAgICBrZXk9e2luZGV4fVxyXG4gICAgICAgIG9uQ2xpY2s9eygpID0+IHtcclxuICAgICAgICAgIHNpZ25Jbihwcm92aWRlci5pZCwgeyBjYWxsYmFja1VybDogXCIvXCIgfSk7XHJcbiAgICAgICAgfX1cclxuICAgICAgICBjbGFzc05hbWU9XCJiZy1yZWQtNDAwIHJvdW5kZWQtbGcgcC0zIHRleHQtd2hpdGUgaG92ZXI6YmctcmVkLTUwMFwiXHJcbiAgICAgID5cclxuICAgICAgICBTaWduIGluIHdpdGgge3Byb3ZpZGVyLm5hbWV9XHJcbiAgICAgIDwvYnV0dG9uPlxyXG4gICAgKTtcclxuICB9KTtcclxuXHJcbiAgcmV0dXJuIChcclxuICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBqdXN0aWZ5LWNlbnRlciBtdC0yMCBzcGFjZS14LTRcIj5cclxuICAgICAgPGltZ1xyXG4gICAgICAgIHNyYz1cImh0dHBzOi8vY2RuLmNtcy10d2RpZ2l0YWxhc3NldHMuY29tL2NvbnRlbnQvZGFtL2hlbHAtdHdpdHRlci9lbi90d2l0dGVyLXRpcHMvZGVza3RvcC1hc3NldHMvY2gtMDEvY2gxMmZpbmRwaG9uZS5wbmcudHdpbWcuMTkyMC5wbmdcIlxyXG4gICAgICAgIGFsdD1cInR3aXR0ZXIgaW1hZ2UgaW5zaWRlIGEgcGhvbmVcIlxyXG4gICAgICAgIGNsYXNzTmFtZT1cImhpZGRlbiBvYmplY3QtY292ZXIgbWQ6dy00NCBtZDpoLTgwIHJvdGF0ZS02ICBtZDppbmxpbmUtZmxleFwiXHJcbiAgICAgIC8+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiXCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGZsZXgtY29sIGl0ZW1zLWNlbnRlclwiPlxyXG4gICAgICAgICAgPGltZ1xyXG4gICAgICAgICAgICBjbGFzc05hbWU9XCJ3LTM2IG9iamVjdC1jb3ZlclwiXHJcbiAgICAgICAgICAgIHNyYz1cImh0dHBzOi8vaGVscC50d2l0dGVyLmNvbS9jb250ZW50L2RhbS9oZWxwLXR3aXR0ZXIvYnJhbmQvbG9nby5wbmdcIlxyXG4gICAgICAgICAgICBhbHQ9XCJ0d2l0dGVyIGxvZ29cIlxyXG4gICAgICAgICAgLz5cclxuICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtY2VudGVyIHRleHQtc20gaXRhbGljIG15LTEwXCI+XHJcbiAgICAgICAgICAgIFRoaXMgYXBwIGlzIGNyZWF0ZWQgZm9yIGxlYXJuaW5nIHB1cnBvc2VzXHJcbiAgICAgICAgICA8L3A+XHJcbiAgICAgICAgICB7cHJvdmlkZXJzQnV0dG9uc31cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgPC9kaXY+XHJcbiAgICA8L2Rpdj5cclxuICApO1xyXG59O1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgc2lnbmluO1xyXG4iXSwibmFtZXMiOlsiZ2V0UHJvdmlkZXJzIiwic2lnbkluIiwiZ2V0U2VydmVyU2lkZVByb3BzIiwicHJvdmlkZXJzIiwicHJvcHMiLCJzaWduaW4iLCJwcm92aWRlcnNCdXR0b25zIiwiT2JqZWN0IiwidmFsdWVzIiwibWFwIiwicHJvdmlkZXIiLCJpbmRleCIsImJ1dHRvbiIsIm9uQ2xpY2siLCJpZCIsImNhbGxiYWNrVXJsIiwiY2xhc3NOYW1lIiwibmFtZSIsImRpdiIsImltZyIsInNyYyIsImFsdCIsInAiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./pages/auth/signin.js\n");
+
+/***/ }),
+
+/***/ "next-auth/react":
+/*!**********************************!*\
+  !*** external "next-auth/react" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = require("next-auth/react");
+
+/***/ }),
+
+/***/ "react/jsx-dev-runtime":
+/*!****************************************!*\
+  !*** external "react/jsx-dev-runtime" ***!
+  \****************************************/
+/***/ ((module) => {
+
+module.exports = require("react/jsx-dev-runtime");
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../../webpack-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = (__webpack_exec__("./pages/auth/signin.js"));
+module.exports = __webpack_exports__;
+
+})();
