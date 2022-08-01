@@ -11,13 +11,16 @@ export async function getServerSideProps() {
 
 const signin = (props) => {
   const { providers } = props;
+  const providerHandler = (provider) => {
+    signIn(provider.id, { callbackUrl: "/" });
+  };
 
   const providersButtons = Object.values(providers).map((provider, index) => {
     return (
       <button
         key={index}
         onClick={() => {
-          signIn(provider.id, { callbackUrl: "/" });
+          providerHandler(provider);
         }}
         className="bg-red-400 rounded-lg p-3 text-white hover:bg-red-500"
       >
