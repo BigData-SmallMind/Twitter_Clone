@@ -56,13 +56,13 @@ const Input = () => {
 
   const addImageToPost = (e) => {
     const reader = new FileReader();
+    console.log(e.target.files[0]);
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
     }
 
     reader.onload = (readerEvent) => {
       setSelectedFile(readerEvent.target.result);
-      console.log(selectedFile);
     };
   };
 
@@ -94,7 +94,7 @@ const Input = () => {
                   onClick={() => {
                     setSelectedFile(null);
                   }}
-                  className="h-11 text-zinc-700 top-2 right-2 absolute cursor-pointer hoverEffect"
+                  className="h-11 text-zinc-700 top-2 right-2 absolute cursor-pointer hoverEffect shadow-md shadow-white bg-gray-50"
                 />
                 <img src={selectedFile} alt="user-image" />
               </div>
