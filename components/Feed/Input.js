@@ -16,19 +16,20 @@ import {
 } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 
-const Input = () => {
+const Input = (props) => {
   const { data: session } = useSession();
   const [postText, setPostText] = useState("");
   const imagePickerRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handlePostText = (e) => {
     setPostText(e.target.value);
   };
 
   const sendPost = async () => {
-    // if (loading) return;
-    // setLoading(true);
+    if (loading) return;
+    setLoading(true);
 
     const docRef = await addDoc(collection(db, "posts"), {
       id: session.user.uid,
@@ -51,6 +52,7 @@ const Input = () => {
     }
 
     setPostText("");
+    setLoading(false);
     setSelectedFile(null);
   };
 
@@ -65,6 +67,8 @@ const Input = () => {
       setSelectedFile(readerEvent.target.result);
     };
   };
+
+  props.postLoading(loading);
 
   return (
     <>
@@ -90,34 +94,42 @@ const Input = () => {
             />
             {selectedFile && (
               <div className="relative">
-                <XIcon
-                  onClick={() => {
-                    setSelectedFile(null);
-                  }}
-                  className="h-11 text-zinc-700 top-2 right-2 absolute cursor-pointer hoverEffect shadow-md shadow-white bg-gray-50"
+                {!loading && (
+                  <XIcon
+                    onClick={() => {
+                      setSelectedFile(null);
+                    }}
+                    className="h-11 text-zinc-700 top-2 right-2 absolute cursor-pointer hoverEffect shadow-md shadow-white bg-gray-50"
+                  />
+                )}
+                <img
+                  src={selectedFile}
+                  className={`${loading && "animate-pulse"}`}
+                  alt="user-image"
                 />
-                <img src={selectedFile} alt="user-image" />
               </div>
             )}
-            <div className="flex justify-between items-center pt-5">
-              <div className="flex items-center">
-                <div
-                  onClick={() => {
-                    imagePickerRef.current.click();
-                  }}
-                >
-                  <PhotographIcon className="h-10 w-10 p-2 text-sky-500 hover:bg-sky-100 hoverEffect" />
-                  <input
-                    hidden
-                    ref={imagePickerRef}
-                    type="file"
-                    onChange={addImageToPost}
-                  />
+
+            {!loading && (
+              <div className="flex justify-between items-center pt-5">
+                <div className="flex items-center">
+                  <div
+                    onClick={() => {
+                      imagePickerRef.current.click();
+                    }}
+                  >
+                    <PhotographIcon className="h-10 w-10 p-2 text-sky-500 hover:bg-sky-100 hoverEffect" />
+                    <input
+                      hidden
+                      ref={imagePickerRef}
+                      type="file"
+                      onChange={addImageToPost}
+                    />
+                  </div>
+                  <EmojiHappyIcon className="h-10 w-10 p-2 text-sky-500 hover:bg-sky-100 hoverEffect" />
                 </div>
-                <EmojiHappyIcon className="h-10 w-10 p-2 text-sky-500 hover:bg-sky-100 hoverEffect" />
-              </div>
-              <button
-                className="
+                <button
+                  className="
                 bg-blue-400
                 text-white
                 rounded-full
@@ -128,12 +140,13 @@ const Input = () => {
                 py-1.5
                 disabled:opacity-25
                 "
-                disabled={!postText.trim()}
-                onClick={sendPost}
-              >
-                Tweet
-              </button>
-            </div>
+                  disabled={!postText.trim()}
+                  onClick={sendPost}
+                >
+                  Tweet
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
