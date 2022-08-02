@@ -6,10 +6,49 @@ import {
   TrashIcon,
   DotsHorizontalIcon,
 } from "@heroicons/react/outline";
+import { HeartIconFilled } from "@heroicons/react/solid";
 import Moment from "react-moment";
+import { useSession } from "next-auth/react";
+import {
+  setDoc,
+  doc,
+  onSnapshot,
+  collection,
+  deleteDoc,
+} from "firebase/firestore";
+import { db } from "../../firebase";
+import { useState, useEffect } from "react";
 
 const Post = (props) => {
   const { post } = props;
+  const { data: session } = useSession();
+  const [postIsLiked, setPostLiked] = useState(false);
+  const [likes, setLikes] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, "posts", post.id, "likes"),
+      (snapshot) => setLikes(snapshot.docs)
+    );
+  }, [db]);
+
+  useEffect(() => {
+    setPostLiked(
+      likes.findIndex((like) => like.id === session.user.uid) !== -1
+    );
+  }, [likes]);
+
+  async function likePost() {
+    if (postIsLiked) {
+      await deleteDoc(doc(db, "posts", post.id, "likes", session.user.uid));
+    } else {
+      await setDoc(doc(db, "posts", post.id, "likes", session.user.uid), {
+        username: session.user.username,
+      });
+    }
+
+    setPostLiked(!postIsLiked);
+  }
 
   return (
     <div className="p-3 flex">
@@ -37,7 +76,7 @@ const Post = (props) => {
               @{post.data().username}
             </span>
             <span className="text-sm sm:text-[15px] hover:underline hover:cursor-pointer">
-              <Moment fromNow>{post.timeStamp?.toDate()}</Moment>
+              <Moment fromNow>{post.data().timeStamp?.toDate()}</Moment>
             </span>
           </div>
           {/* DotIcon */}
@@ -59,7 +98,12 @@ const Post = (props) => {
         <div className="flex justify-around mt-2 w-full">
           <ChartBarIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
           <TrashIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
-          <HeartIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <HeartIcon
+            onClick={likePost}
+            className={`h-9 w-9  hoverEffect p-2 hover:text-red-500 hover:bg-red-100 ${
+              postIsLiked && " fill-red-700 text-red-700"
+            }`}
+          />
           <ShareIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
           <ChatIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
         </div>
