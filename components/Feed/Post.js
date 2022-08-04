@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/outline";
 import { HeartIconFilled } from "@heroicons/react/solid";
 import Moment from "react-moment";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import {
   setDoc,
   doc,
@@ -16,14 +16,17 @@ import {
   collection,
   deleteDoc,
 } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db, storage } from "../../firebase";
 import { useState, useEffect } from "react";
+import { deleteObject, ref } from "firebase/storage";
+import { useRouter } from "next/router";
 
 const Post = (props) => {
   const { post } = props;
   const { data: session } = useSession();
   const [postIsLiked, setPostLiked] = useState(false);
   const [likes, setLikes] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -34,20 +37,34 @@ const Post = (props) => {
 
   useEffect(() => {
     setPostLiked(
-      likes.findIndex((like) => like.id === session.user.uid) !== -1
+      likes.findIndex((like) => like.id === session?.user.uid) !== -1
     );
   }, [likes]);
 
   async function likePost() {
-    if (postIsLiked) {
-      await deleteDoc(doc(db, "posts", post.id, "likes", session.user.uid));
+    if (session) {
+      if (postIsLiked) {
+        await deleteDoc(doc(db, "posts", post.id, "likes", session?.user.uid));
+      } else {
+        await setDoc(doc(db, "posts", post.id, "likes", session?.user.uid), {
+          username: session.user.username,
+        });
+      }
     } else {
-      await setDoc(doc(db, "posts", post.id, "likes", session.user.uid), {
-        username: session.user.username,
-      });
+      signIn();
     }
 
     setPostLiked(!postIsLiked);
+  }
+
+  async function deletePost() {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      if (post.data().image) {
+        await deleteObject(ref(storage, `posts/${post.id}/image`));
+      }
+      await deleteDoc(doc(db, "posts", post.id));
+      router.push("/");
+    }
   }
 
   return (
@@ -97,13 +114,24 @@ const Post = (props) => {
         {/* Post Icons */}
         <div className="flex justify-around mt-2 w-full">
           <ChartBarIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
-          <TrashIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
-          <HeartIcon
-            onClick={likePost}
-            className={`h-9 w-9  hoverEffect p-2 hover:text-red-500 hover:bg-red-100 ${
-              postIsLiked && " fill-red-700 text-red-700"
-            }`}
-          />
+          {session?.user.uid === post.data().id && (
+            <TrashIcon
+              onClick={deletePost}
+              className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"
+            />
+          )}
+
+          <div className="flex items-center justify-center relative">
+            <HeartIcon
+              onClick={likePost}
+              className={`h-9 w-9  hoverEffect p-2 hover:text-red-500 hover:bg-red-100  ${
+                postIsLiked && session && " fill-red-700 text-red-700"
+              }`}
+            />
+            {likes.length > 0 && (
+              <span className="absolute left-10">{likes.length}</span>
+            )}
+          </div>
           <ShareIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
           <ChatIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
         </div>

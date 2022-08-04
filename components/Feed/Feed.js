@@ -7,27 +7,6 @@ import Input from "./Input";
 import Posts from "./Posts";
 
 const Feed = () => {
-  // const posts = [
-  //   {
-  //     id: "1",
-  //     name: "Mohamed Farid",
-  //     userName: "mohfareed",
-  //     timeStamp: "2 days ago",
-  //     userImage: "https://avatars.githubusercontent.com/u/54191647?v=4",
-  //     image:
-  //       "https://iso.500px.com/wp-content/uploads/2016/03/stock-photo-142984111.jpg",
-  //     text: "The best deer to have ever walked the forests",
-  //   },
-  //   {
-  //     id: "2",
-  //     name: "Farid Nour",
-  //     userName: "fnoor",
-  //     timeStamp: "6 days ago",
-  //     userImage: "https://avatars.githubusercontent.com/u/54191647?v=4",
-  //     image: "https://storage.googleapis.com/pod_public/750/122741.jpg",
-  //     text: "The Himalayas are home to 10000 people",
-  //   },
-  // ];
   const [posts, setPosts] = useState([]);
   useEffect(
     () =>
