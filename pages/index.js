@@ -2,6 +2,7 @@ import Head from "next/head";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Feed from "../components/Feed/Feed";
 import Widgets from "../components/Widgets/Widgets";
+import Modal from "../components/Modal";
 
 export async function getServerSideProps() {
   const newsResults = await fetch(
@@ -43,6 +44,7 @@ export default function Home(props) {
         />
 
         {/* Modal */}
+        <Modal />
       </main>
     </>
   );

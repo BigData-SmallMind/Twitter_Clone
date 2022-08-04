@@ -20,12 +20,15 @@ import { db, storage } from "../../firebase";
 import { useState, useEffect } from "react";
 import { deleteObject, ref } from "firebase/storage";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { modalState } from "../../atom/modalAtom";
 
 const Post = (props) => {
   const { post } = props;
   const { data: session } = useSession();
   const [postIsLiked, setPostLiked] = useState(false);
   const [likes, setLikes] = useState([]);
+  const [isOpen, setOpen] = useRecoilState(modalState)
   const router = useRouter();
 
   useEffect(() => {
@@ -65,6 +68,10 @@ const Post = (props) => {
       await deleteDoc(doc(db, "posts", post.id));
       router.push("/");
     }
+  }
+
+  const handleChat = () => {
+    setOpen(!isOpen)
   }
 
   return (
@@ -113,6 +120,10 @@ const Post = (props) => {
 
         {/* Post Icons */}
         <div className="flex justify-around mt-2 w-full">
+          <ChatIcon
+            onClick={handleChat}
+            className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"
+          />
           <ChartBarIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
           {session?.user.uid === post.data().id && (
             <TrashIcon
@@ -133,7 +144,6 @@ const Post = (props) => {
             )}
           </div>
           <ShareIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
-          <ChatIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
         </div>
       </div>
     </div>
