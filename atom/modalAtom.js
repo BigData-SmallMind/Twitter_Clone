@@ -1,7 +1,11 @@
-import { atom } from 'recoil'
+import { atom } from "recoil";
 
 export const modalState = atom({
   key: "modalState", // unique ID (with respect to other atoms/selectors)
-  default: "", // default value (aka initial value)
+  default: false, // default value (aka initial value)
 });
 
+export const postIdState = atom({
+  key: "postIdstate", // unique ID (with respect to other atoms/selectors)
+  default: "id", // default value (aka initial value)
+});

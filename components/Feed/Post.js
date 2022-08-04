@@ -21,14 +21,15 @@ import { useState, useEffect } from "react";
 import { deleteObject, ref } from "firebase/storage";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
-import { modalState } from "../../atom/modalAtom";
+import { modalState, postIdState } from "../../atom/modalAtom";
 
 const Post = (props) => {
   const { post } = props;
   const { data: session } = useSession();
   const [postIsLiked, setPostLiked] = useState(false);
   const [likes, setLikes] = useState([]);
-  const [isOpen, setOpen] = useRecoilState(modalState)
+  const [isOpen, setOpen] = useRecoilState(modalState);
+  const [postId, setPostId] = useRecoilState(postIdState);
   const router = useRouter();
 
   useEffect(() => {
@@ -71,8 +72,13 @@ const Post = (props) => {
   }
 
   const handleChat = () => {
-    setOpen(!isOpen)
-  }
+    if (!session) {
+      signIn();
+    } else {
+      setOpen(!isOpen);
+      setPostId(post.id);
+    }
+  };
 
   return (
     <div className="p-3 flex">

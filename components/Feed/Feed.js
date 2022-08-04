@@ -20,7 +20,6 @@ const Feed = () => {
   );
 
   const postLoading = (loadingState) => {
-    console.log(loadingState);
     setLiftedState(loadingState);
   };
   const [liftedState, setLiftedState] = useState(false);

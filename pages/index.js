@@ -2,7 +2,7 @@ import Head from "next/head";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Feed from "../components/Feed/Feed";
 import Widgets from "../components/Widgets/Widgets";
-import Modal from "../components/Modal";
+import Modal from "../components/CommentModal";
 
 export async function getServerSideProps() {
   const newsResults = await fetch(
