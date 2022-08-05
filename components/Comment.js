@@ -96,7 +96,7 @@ export default function Comment({ comment, commentId, originalPostId }) {
 
         <div className="flex items-center justify-between">
           {/* post user info */}
-          <div className="flex items-center space-x-1 whitespace-nowrap">
+          <div className="flex items-center space-x-1 whitespace-nowrap flex-wrap">
             <h4 className="font-bold text-[15px] sm:text-[16px] hover:underline">
               {comment?.name}
             </h4>
@@ -141,25 +141,15 @@ export default function Comment({ comment, commentId, originalPostId }) {
               className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100"
             />
           )}
-          <div className="flex items-center">
-            {hasLiked ? (
-              <HeartIconFilled
-                onClick={likeComment}
-                className="h-9 w-9 hoverEffect p-2 text-red-600 hover:bg-red-100"
-              />
-            ) : (
-              <HeartIcon
-                onClick={likeComment}
-                className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100"
-              />
-            )}
+    <div className="flex items-center justify-center relative">
+            <HeartIcon
+              onClick={likeComment}
+              className={`h-9 w-9  hoverEffect p-2 hover:text-red-500 hover:bg-red-100  ${
+                hasLiked && currentUser && " fill-red-700 text-red-700"
+              }`}
+            />
             {likes.length > 0 && (
-              <span
-                className={`${hasLiked && "text-red-600"} text-sm select-none`}
-              >
-                {" "}
-                {likes.length}
-              </span>
+              <span className="absolute left-10">{likes.length}</span>
             )}
           </div>
 

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import SideBarMenuItem from "./SideBarMenuItem";
-import { useSession, signIn } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import {
   HomeIcon,
   HashtagIcon,
@@ -47,23 +47,43 @@ const Sidebar = () => {
 
       {/* Button */}
       {session ? (
-        <button
-          className="
-          bg-blue-400
-          text-white
-            rounded-full
-            w-56
-            h-12
-            font-bold
-            shadow-md
-            hover:brightness-95
-            text-lg
-            hidden
-            xl:inline
-            "
-        >
-          Tweet
-        </button>
+        <div className="">
+          <button
+            className="
+            bg-blue-400
+            text-white
+              rounded-full
+              w-56
+              h-12
+              font-bold
+              shadow-md
+              hover:brightness-95
+              text-lg
+              hidden
+              xl:inline
+              "
+          >
+            Tweet
+          </button>
+          <button
+            onClick={signOut}
+            className="
+            text-blue-400
+              rounded-full
+              w-56
+              h-12
+              font-bold
+              shadow-md
+              hover:brightness-95
+              text-lg
+              hidden
+              xl:block
+              mt-5
+              "
+          >
+            Sign out
+          </button>
+        </div>
       ) : (
         <button
           onClick={signIn}

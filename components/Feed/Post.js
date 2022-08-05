@@ -34,6 +34,7 @@ const Post = (props) => {
   const [isOpen, setOpen] = useRecoilState(modalState);
   const [postId, setPostId] = useRecoilState(postIdState);
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
+  const [comments, setComments] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -43,6 +44,13 @@ const Post = (props) => {
   useEffect(() => {
     onSnapshot(collection(db, "posts", id, "likes"), (snapshot) =>
       setLikes(snapshot.docs)
+    );
+  }, [db]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, "posts", id, "comments"),
+      (snapshot) => setComments(snapshot.docs)
     );
   }, [db]);
 
@@ -80,7 +88,7 @@ const Post = (props) => {
 
   const handleChat = () => {
     if (!session) {
-      signIn();
+      router.push("/auth/signin");
     } else {
       setOpen(!isOpen);
       setPostId(id);
@@ -119,24 +127,30 @@ const Post = (props) => {
           {/* DotIcon */}
           <DotsHorizontalIcon className="hoverEffect h-10 w-10 p-2" />
         </div>
-
         {/* Post Description Text*/}
         <span className="pt-5">{post?.data().text}</span>
-
         {/* Post image */}
-
         <img
+          onClick={() => {
+            !router.asPath.includes(id) && router.push(`posts/${id}`);
+          }}
           src={post?.data().image}
-          className="w-full rounded-xl"
+          className={`w-full rounded-xl ${
+            !router.asPath.includes(id) && "cursor-pointer"
+          }`}
           alt={post?.text}
         />
-
-        {/* Post Icons */}
+        {/* Post Icons */}{" "}
         <div className="flex justify-around mt-2 w-full">
-          <ChatIcon
-            onClick={handleChat}
-            className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"
-          />
+          <div className="flex items-center justify-center relative">
+            <ChatIcon
+              onClick={handleChat}
+              className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"
+            />
+            {comments.length > 0 && (
+              <span className="absolute left-10">{comments.length}</span>
+            )}
+          </div>
           <ChartBarIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
           {session?.user.uid === post?.data().id && (
             <TrashIcon

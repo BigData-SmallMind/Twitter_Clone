@@ -4,7 +4,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import Image from "next/image";
-import { useSession, signOut } from "next-auth/react";
+import { useSession  } from "next-auth/react";
 import { useState, useRef } from "react";
 import { db, storage } from "../../firebase";
 import {
@@ -80,7 +80,7 @@ const Input = (props) => {
               alt="user-image"
               height="40"
               width="40"
-              onClick={signOut}
+
             />
           </div>
           <div className="w-full divide-y divide-gray-200">
