@@ -28,7 +28,7 @@ import {
 } from "../../atom/modalAtom";
 
 const Post = (props) => {
-  const { post } = props;
+  const { post, id } = props;
   const { data: session } = useSession();
   const [postIsLiked, setPostLiked] = useState(false);
   const [likes, setLikes] = useState([]);
@@ -42,7 +42,7 @@ const Post = (props) => {
   }, [session?.user]);
 
   useEffect(() => {
-    onSnapshot(collection(db, "posts", post.id, "likes"), (snapshot) =>
+    onSnapshot(collection(db, "posts", id, "likes"), (snapshot) =>
       setLikes(snapshot.docs)
     );
   }, [db]);
@@ -56,9 +56,9 @@ const Post = (props) => {
   async function likePost() {
     if (session) {
       if (postIsLiked) {
-        await deleteDoc(doc(db, "posts", post.id, "likes", session?.user.uid));
+        await deleteDoc(doc(db, "posts", id, "likes", session?.user.uid));
       } else {
-        await setDoc(doc(db, "posts", post.id, "likes", session?.user.uid), {
+        await setDoc(doc(db, "posts", id, "likes", session?.user.uid), {
           username: session.user.username,
         });
       }
@@ -72,9 +72,9 @@ const Post = (props) => {
   async function deletePost() {
     if (window.confirm("Are you sure you want to delete this post?")) {
       if (post?.data().image) {
-        await deleteObject(ref(storage, `posts/${post.id}/image`));
+        await deleteObject(ref(storage, `posts/${id}/image`));
       }
-      await deleteDoc(doc(db, "posts", post.id));
+      await deleteDoc(doc(db, "posts", id));
       router.push("/");
     }
   }
@@ -84,7 +84,7 @@ const Post = (props) => {
       signIn();
     } else {
       setOpen(!isOpen);
-      setPostId(post.id);
+      setPostId(id);
     }
   };
 

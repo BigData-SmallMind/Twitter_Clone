@@ -6,7 +6,7 @@ const Posts = (props) => {
     <ul>
       {posts.map((post) => {
         return (
-          <Post key={post.id} post={post} liftedState={liftedLoadingState} />
+          <Post key={post.id} post={post} id={post.id} liftedState={liftedLoadingState} />
         );
       })}
     </ul>

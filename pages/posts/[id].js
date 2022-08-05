@@ -64,7 +64,7 @@ export default function PostPage({ newsResults, randomUsersResults }) {
             </h2>
           </div>
 
-          <Post post={post} />
+          <Post post={post} id={id}/>
           {/* <div>{JSON.stringify(post.data().username)}</div> */}
 
           
