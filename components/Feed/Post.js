@@ -21,7 +21,11 @@ import { useState, useEffect } from "react";
 import { deleteObject, ref } from "firebase/storage";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
-import { modalState, postIdState } from "../../atom/modalAtom";
+import {
+  modalState,
+  postIdState,
+  currentUserState,
+} from "../../atom/modalAtom";
 
 const Post = (props) => {
   const { post } = props;
@@ -30,12 +34,16 @@ const Post = (props) => {
   const [likes, setLikes] = useState([]);
   const [isOpen, setOpen] = useRecoilState(modalState);
   const [postId, setPostId] = useRecoilState(postIdState);
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
-      collection(db, "posts", post.id, "likes"),
-      (snapshot) => setLikes(snapshot.docs)
+    setCurrentUser(session?.user);
+  }, [session?.user]);
+
+  useEffect(() => {
+    onSnapshot(collection(db, "posts", post.id, "likes"), (snapshot) =>
+      setLikes(snapshot.docs)
     );
   }, [db]);
 
@@ -63,7 +71,7 @@ const Post = (props) => {
 
   async function deletePost() {
     if (window.confirm("Are you sure you want to delete this post?")) {
-      if (post.data().image) {
+      if (post?.data().image) {
         await deleteObject(ref(storage, `posts/${post.id}/image`));
       }
       await deleteDoc(doc(db, "posts", post.id));
@@ -85,7 +93,7 @@ const Post = (props) => {
       {/* Left Side - User Image */}
       <div className="pr-2">
         <img
-          src={post.data().userImage}
+          src={post?.data().userImage}
           className="hover:brightness-95 cursor-pointer h-10 w-10 rounded-full"
           alt="user-image"
           height="40"
@@ -100,13 +108,13 @@ const Post = (props) => {
           {/* Name & @Name & timestamp */}
           <div className="flex space-x-2">
             <h4 className="font-bold text-[15px] sm:text-[16px] hover:underline hover:cursor-pointer">
-              {post.data().name}
+              {post?.data().name}
             </h4>
             <span className="text-sm sm:text-[15px] hover:underline hover:cursor-pointer">
-              @{post.data().username}
+              @{post?.data().username}
             </span>
             <span className="text-sm sm:text-[15px] hover:underline hover:cursor-pointer">
-              <Moment fromNow>{post.data().timeStamp?.toDate()}</Moment>
+              <Moment fromNow>{post?.data().timeStamp?.toDate()}</Moment>
             </span>
           </div>
           {/* DotIcon */}
@@ -114,12 +122,12 @@ const Post = (props) => {
         </div>
 
         {/* Post Description Text*/}
-        <span className="pt-5">{post.data().text}</span>
+        <span className="pt-5">{post?.data().text}</span>
 
         {/* Post image */}
 
         <img
-          src={post.data().image}
+          src={post?.data().image}
           className="w-full rounded-xl"
           alt={post.text}
         />
@@ -131,7 +139,7 @@ const Post = (props) => {
             className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"
           />
           <ChartBarIcon className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
-          {session?.user.uid === post.data().id && (
+          {session?.user.uid === post?.data().id && (
             <TrashIcon
               onClick={deletePost}
               className="h-9 w-9  hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"

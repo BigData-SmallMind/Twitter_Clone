@@ -9,3 +9,8 @@ export const postIdState = atom({
   key: "postIdstate", // unique ID (with respect to other atoms/selectors)
   default: "id", // default value (aka initial value)
 });
+
+export const currentUserState = atom({
+  key: "currentUserState", // unique ID (with respect to other atoms/selectors)
+  default: "user", // default value (aka initial value)
+});
