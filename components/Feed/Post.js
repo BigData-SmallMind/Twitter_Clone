@@ -6,7 +6,6 @@ import {
   TrashIcon,
   DotsHorizontalIcon,
 } from "@heroicons/react/outline";
-import { HeartIconFilled } from "@heroicons/react/solid";
 import Moment from "react-moment";
 import { signIn, useSession } from "next-auth/react";
 import {
@@ -129,7 +128,7 @@ const Post = (props) => {
         <img
           src={post?.data().image}
           className="w-full rounded-xl"
-          alt={post.text}
+          alt={post?.text}
         />
 
         {/* Post Icons */}

@@ -19,7 +19,7 @@ import Comment from "../../components/Comment";
 export default function PostPage({ newsResults, randomUsersResults }) {
   const router = useRouter();
   const { id } = router.query;
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState();
   const [comments, setComments] = useState([]);
 
   // get the post data
@@ -64,10 +64,9 @@ export default function PostPage({ newsResults, randomUsersResults }) {
             </h2>
           </div>
 
-          <Post post={post} id={id}/>
+          <Post post={post} id={id} />
           {/* <div>{JSON.stringify(post.data().username)}</div> */}
 
-          
           {comments.length > 0 && (
             <div className="">
               {comments.map((comment) => (
